@@ -7,5 +7,5 @@ module.exports = {
       '/about': { page: '/about' }
     }
   },
-  assetPrefix: !debug ? '/Next-gh-page-example/' : ''
+  assetPrefix: !debug ? '/spending-tracking-notion/' : ''
 }
