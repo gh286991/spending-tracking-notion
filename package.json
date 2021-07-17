@@ -13,7 +13,9 @@
     "deploy": "gh-pages -d out"
   },
   "dependencies": {
+    "@notionhq/client": "^0.2.2",
     "next": "11.0.1",
+    "ramda": "^0.27.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "swr": "^0.5.6"
