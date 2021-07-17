@@ -1,10 +1,5 @@
 import notion from '../lib/notionConfig';
-import { Client } from '@notionhq/client';
 
-// Initializing a client
-const notionOptiin = new Client({
-  auth: notion.BEARER_TOKEN,
-});
 const getRequestInitPrefix = () => ({
   method: 'GET',
   headers: {

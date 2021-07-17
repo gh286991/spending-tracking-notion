@@ -5,12 +5,13 @@ import getTestFetcher from './GetNotionDatabase';
 import { Client } from '@notionhq/client';
 import notionConfig from '../lib/notionConfig';
 
-export default function Home({ books }) {
+export default function Home(props: any) {
+  const { books } = props;
   const envURL = process.env.BACKEND_URL;
 
   console.log('book', books);
   const url = `https://api.notion.com/v1/databases/${notion.DATABASE_ID}`;
-  const { data, error } = useSWR(url, getTestFetcher);
+  const { data } = useSWR(url, getTestFetcher);
   console.log('data', data);
   return (
     <div>
