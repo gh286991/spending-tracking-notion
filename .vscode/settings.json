@@ -1,0 +1,18 @@
+{
+  "i18n-ally.localesPaths": ["public/locales"],
+  "i18n-ally.keystyle": "nested",
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.printWidth": 100,
+  "prettier.trailingComma": "all",
+  "prettier.tabWidth": 2,
+  "cSpell.words": [
+    "Cloze",
+    "Hiragino",
+    "Vinter",
+    "Yenti",
+    "odata",
+    "vcenter"
+  ],
+}
