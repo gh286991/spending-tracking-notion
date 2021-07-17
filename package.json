@@ -2,12 +2,15 @@
   "name": "spending-tracking-notion",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gh286991.github.io/spending-tracking-notion/",
   "scripts": {
     "dev": "next dev -p 7019",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
+    "buildStatic": "next build && next export",
+    "predeploy": "yarn buildStatic",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "next": "11.0.1",
@@ -19,6 +22,7 @@
     "babel-plugin-transform-define": "^2.0.0",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
+    "gh-pages": "^3.2.3",
     "typescript": "4.3.5"
   }
 }
