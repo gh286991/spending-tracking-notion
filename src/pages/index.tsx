@@ -6,7 +6,6 @@ import { RadialChart } from 'react-vis';
 
 export default function Home(props: any) {
   const { books, data } = props;
-  const envURL = process.env.BACKEND_URL;
 
   console.log('book', books);
   console.log('data', data);
@@ -20,10 +19,11 @@ export default function Home(props: any) {
   return (
     <div>
       Hello World.
-      <Link href="/about" as={envURL + '/about'}>
+      <Link href="/about">
         <a>About</a>
       </Link>
       <RadialChart data={myData} width={300} height={300} labelsAboveChildren={true} showLabels />
+      {String(data)}
     </div>
   );
 }
