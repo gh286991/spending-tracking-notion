@@ -100,12 +100,13 @@ export default function Home(props: any) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const notion = new Client({ auth: notionConfig.BEARER_TOKEN });
   const response = await notion.databases.query({
     database_id: notionConfig.DATABASE_ID,
   });
 
+  console.log('response', response);
   return {
     props: {
       data: response.results,
