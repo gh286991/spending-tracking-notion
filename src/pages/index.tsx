@@ -61,6 +61,8 @@ export default function Home(props: any) {
   const scale = {
     y: { min: 0, max: 1500 },
   };
+
+  console.log(calXYData());
   return (
     <>
       <Head>
