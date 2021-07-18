@@ -1,24 +1,29 @@
 import Link from 'next/link';
-import useSWR from 'swr';
-import notion from '../lib/notionConfig';
-import getTestFetcher from './GetNotionDatabase';
 import { Client } from '@notionhq/client';
 import notionConfig from '../lib/notionConfig';
+import * as R from 'ramda';
+import { RadialChart } from 'react-vis';
 
 export default function Home(props: any) {
-  const { books } = props;
+  const { books, data } = props;
   const envURL = process.env.BACKEND_URL;
 
   console.log('book', books);
-  const url = `https://api.notion.com/v1/databases/${notion.DATABASE_ID}`;
-  const { data } = useSWR(url, getTestFetcher);
   console.log('data', data);
+  const myData = [
+    { angle: 1 },
+    { angle: 2, label: 'Super Custom label', subLabel: 'With annotation' },
+    { angle: 5, label: 'Alt Label' },
+    { angle: 3 },
+    { angle: 5, subLabel: 'Sub Label only', className: 'custom-class' },
+  ];
   return (
     <div>
       Hello World.
       <Link href="/about" as={envURL + '/about'}>
         <a>About</a>
       </Link>
+      <RadialChart data={myData} width={300} height={300} labelsAboveChildren={true} showLabels />
     </div>
   );
 }
@@ -29,9 +34,18 @@ export async function getStaticProps() {
     database_id: notionConfig.DATABASE_ID,
   });
 
+  const result = response.results;
+
+  const data = result.map((item) => {
+    const name = R.pathOr('', ['properties', 'Name', 'title', 0, 'text', 'content'], item);
+    return name;
+  });
+
+  console.log('data', data);
   return {
     props: {
       books: response.results,
+      data,
     },
   };
 }
