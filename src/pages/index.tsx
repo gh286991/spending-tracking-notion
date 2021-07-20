@@ -5,7 +5,13 @@ import Head from 'next/head';
 import * as R from 'ramda';
 import moment from 'moment';
 import { RadialChart } from 'react-vis';
-import { Chart, Line, Point, Tooltip, Legend } from 'bizcharts';
+// import { Chart, Line, Point, Tooltip, Legend } from 'bizcharts';
+
+import dynamic from 'next/dynamic';
+
+const ApexChartNoSSR = dynamic(() => import('./apexCharts'), {
+  ssr: false,
+});
 
 export default function Home(props: any) {
   const { data } = props;
@@ -58,11 +64,10 @@ export default function Home(props: any) {
     { angle: 5, subLabel: 'Sub Label only', className: 'custom-class' },
   ];
 
-  const scale = {
-    y: { min: 0, max: 1500 },
-  };
+  // const scale = {
+  //   y: { min: 0, max: 1500 },
+  // };
 
-  console.log(calXYData());
   return (
     <>
       <Head>
@@ -74,7 +79,7 @@ export default function Home(props: any) {
           <a>About</a>
         </Link>
         <RadialChart data={myData} width={300} height={300} labelsAboveChildren={true} showLabels />
-        <Chart
+        {/* <Chart
           scale={scale}
           padding={[30, 20, 60, 40]}
           autoFit
@@ -94,7 +99,8 @@ export default function Home(props: any) {
               },
             }}
           />
-        </Chart>
+        </Chart> */}
+        <ApexChartNoSSR data={calXYData()} />
       </div>
     </>
   );
