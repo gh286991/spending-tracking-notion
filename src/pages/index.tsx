@@ -50,7 +50,7 @@ export default function Home(props: any) {
     const newResult = result.sort(function (a: any, b: any) {
       const newA = new Date(a.x) as any;
       const newB = new Date(b.x) as any;
-      return newA - newB;
+      return newA > newB ? 1 : newA < newB ? -1 : 0;
     });
 
     return newResult.filter((item) => item.x !== 'Invalid date');
