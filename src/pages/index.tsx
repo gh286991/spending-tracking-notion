@@ -47,13 +47,7 @@ export default function Home(props: any) {
 
     result = Object.entries(hash).map(([date, amount]) => ({ x: date, y: amount }));
 
-    const newResult = result.sort(function (a: any, b: any) {
-      const newA = new Date(a.x) as any;
-      const newB = new Date(b.x) as any;
-      return newA > newB ? 1 : newA < newB ? -1 : 0;
-    });
-
-    return newResult.filter((item) => item.x !== 'Invalid date');
+    return result.filter((item) => item.x !== 'Invalid date');
   };
 
   const myData = [
@@ -108,11 +102,17 @@ export default function Home(props: any) {
 
 export async function getServerSideProps() {
   const notion = new Client({ auth: notionConfig.BEARER_TOKEN });
+
   const response = await notion.databases.query({
     database_id: notionConfig.DATABASE_ID,
+    sorts: [
+      {
+        property: '日期',
+        direction: 'ascending',
+      },
+    ],
   });
 
-  console.log('response', response);
   return {
     props: {
       data: response.results,
