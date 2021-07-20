@@ -1,14 +1,16 @@
 // @ts-nocheck
 
 import dynamic from 'next/dynamic';
+import * as R from 'ramda';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const ApexChart = (Props) => {
   const { data } = Props;
-  console.log('data', data);
-  const yData = data.map((item) => item.y);
-  const xData = data.map((item) => item.x);
+  const inputData = R.pathOr([], [], data);
+
+  const yData = inputData.map((item) => item.y);
+  const xData = inputData.map((item) => item.x);
   const newData = {
     series: [
       {
